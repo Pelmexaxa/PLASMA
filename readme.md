@@ -2,8 +2,8 @@
 
 <h3 align="left">Request:</h3>
 <p align="left">
-- PySide6 (GUI) <br>
-- gpiozero (PINS)
+- PySide6 (GUI) - sudo apt-get install "python3-PySide2.*" <br>
+- gpiozero (PINS) - pip install gpiozero
 </p>
 11 pin - output
 <h3 align="left">Languages and Tools:</h3>
