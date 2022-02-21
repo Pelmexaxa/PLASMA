@@ -3,9 +3,9 @@ import os
 
 from gpiozero import LED
 
-from PySide6.QtCore import *
-from PySide6.QtWidgets import *
-from PySide6.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
+from PySide2.QtGui import *
 from ui_plasma import *
 
 
@@ -20,10 +20,7 @@ class MainWindow(QMainWindow):
 
         self.outLED = LED(17)
 
-        # self.time = QTime(0, 0, 0)
         self.time_now = {'hour': 0, 'minute': 0, 'second': 0}
-        self.button_connect = None
-        self.timer_connect = None
 
         self.mass_control_button = [
             self.ui.l_down_button,
@@ -79,7 +76,9 @@ class MainWindow(QMainWindow):
         if self.end_timer():
             print('ВЫКЛ')
             self.timer_on_off()
-            self.disconnect(self.timer_connect)
+            self.timer.timeout.disconnect()
+            self.ui.pushButton.clicked.disconnect()
+            self.state_NORMAL()
         else:
             self.reduce_one_sec()
 
@@ -117,10 +116,10 @@ class MainWindow(QMainWindow):
         print('kek')
         if self.timer.isActive() == False:
             self.timer.setInterval(100)
-            #self.outLED.on()
+            self.outLED.on()
             self.timer.start()
         else:
-            #self.outLED.off()
+            self.outLED.off()
             self.timer.stop()
 
     def state_NORMAL(self):
@@ -128,21 +127,21 @@ class MainWindow(QMainWindow):
         self.time_now['minute'] = 0
         self.time_now['second'] = 0
         #self.disconnect(self.button_connect)
-        self.button_connect = self.ui.pushButton.clicked.connect(self.state_NEW_TIMER)
+        self.ui.pushButton.clicked.connect(self.state_NEW_TIMER)
         self.visible_control_button(False)
 
     def state_NEW_TIMER(self):
         self.visible_control_button(True)
-        self.disconnect(self.button_connect)
+        self.ui.pushButton.clicked.disconnect()
         self.button_connect = self.ui.pushButton.clicked.connect(self.state_START_TIMER)
 
     def state_START_TIMER(self):
         self.get_data_on_digit()
         self.visible_control_button(False)
-        self.timer_connect = self.timer.timeout.connect(self.set_data_on_digit)
+        self.timer.timeout.connect(self.set_data_on_digit)
         self.timer_on_off()
-        self.disconnect(self.button_connect)
-        self.button_connect = self.ui.pushButton.clicked.connect(self.timer_on_off)
+        self.ui.pushButton.clicked.disconnect()
+        self.ui.pushButton.clicked.connect(self.timer_on_off)
 
 
 if __name__ == "__main__":
@@ -150,4 +149,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.state_NORMAL()
     window.show()
-    sys.exit(app.exec())
+    sys.exit(app.exec_())
