@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="161.938" height="100.022" viewBox="0 0 161.938 100.022">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #50fff9;
+      }
+    </style>
+  </defs>
+  <g id="arrow-left-1" transform="translate(161.938) rotate(90)">
+    <path id="Arrow-left-1-2" data-name="Arrow-left-1" class="cls-1" d="M99.958,144.978a16.87,16.87,0,0,0-5-12.029L41.832,80.969,94.96,28.99a16.755,16.755,0,0,0,0-24,17.535,17.535,0,0,0-24.5,0L5.086,68.975a16.66,16.66,0,0,0,0,23.966L70.4,156.949a17.535,17.535,0,0,0,24.5,0,16.764,16.764,0,0,0,5-11.971" transform="translate(0 0)"/>
+  </g>
+</svg>
