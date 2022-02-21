@@ -41,9 +41,6 @@ class MainWindow(QMainWindow):
             self.ui.digit_2,
             self.ui.digit_3]
 
-        # Набор состояний - NORMAL, NEW_TIMER, START_TIMER, END_TIMER
-        # self.state = 'NORMAL'
-
     def visible_control_button(self, state):
         for elem in self.mass_control_button:
             if state:
@@ -71,9 +68,9 @@ class MainWindow(QMainWindow):
         self.mass_data_digit[0].setText(str(self.time_now['hour']))
         self.mass_data_digit[1].setText(str(self.time_now['minute']))
         self.mass_data_digit[2].setText(str(self.time_now['second']))
-        print(f"{self.time_now['hour']}-{self.time_now['minute']}-{self.time_now['second']}")
+        #print(f"{self.time_now['hour']}-{self.time_now['minute']}-{self.time_now['second']}")
         if self.end_timer():
-            print('ВЫКЛ')
+            #print('ВЫКЛ')
             self.timer_on_off()
             self.timer.timeout.disconnect()
             self.ui.pushButton.clicked.disconnect()
@@ -112,9 +109,8 @@ class MainWindow(QMainWindow):
             self.time_now['hour'] -= 1
 
     def timer_on_off(self):
-        print('kek')
         if self.timer.isActive() == False:
-            self.timer.setInterval(100)
+            self.timer.setInterval(1000)
             self.outLED.on()
             self.timer.start()
         else:
