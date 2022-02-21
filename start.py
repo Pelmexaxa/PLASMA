@@ -52,11 +52,11 @@ class MainWindow(QMainWindow):
         old = int(self.mass_data_digit[index].text())
         if increment:
             if old + 1 == 10:
-                old = 8
+                old = 0
             self.mass_data_digit[index].setText(f"{old + 1}")
         else:
             if old - 1 == -1:
-                old = 1
+                old = 10
             self.mass_data_digit[index].setText(f"{old - 1}")
 
     def get_data_on_digit(self):
@@ -72,7 +72,6 @@ class MainWindow(QMainWindow):
         if self.end_timer():
             #print('ВЫКЛ')
             self.timer_on_off()
-            self.timer.timeout.disconnect()
             self.ui.pushButton.clicked.disconnect()
             self.state_NORMAL()
         else:
@@ -116,19 +115,23 @@ class MainWindow(QMainWindow):
         else:
             self.outLED.off()
             self.timer.stop()
+            self.timer.timeout.disconnect()
+            self.ui.pushButton.clicked.disconnect()
+            self.state_NORMAL()
 
     def state_NORMAL(self):
         self.time_now['hour'] = 0
         self.time_now['minute'] = 0
         self.time_now['second'] = 0
         #self.disconnect(self.button_connect)
-        self.ui.pushButton.clicked.connect(self.state_NEW_TIMER)
-        self.visible_control_button(False)
-
-    def state_NEW_TIMER(self):
+        #self.ui.pushButton.clicked.connect(self.state_NEW_TIMER)
         self.visible_control_button(True)
-        self.ui.pushButton.clicked.disconnect()
-        self.button_connect = self.ui.pushButton.clicked.connect(self.state_START_TIMER)
+        self.ui.pushButton.clicked.connect(self.state_START_TIMER)
+
+    # def state_NEW_TIMER(self):
+    #     self.visible_control_button(True)
+    #     self.ui.pushButton.clicked.disconnect()
+    #     self.button_connect = self.ui.pushButton.clicked.connect(self.state_START_TIMER)
 
     def state_START_TIMER(self):
         self.get_data_on_digit()
