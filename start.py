@@ -9,7 +9,6 @@ from PySide2.QtGui import *
 from ui_plasma import *
 
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)

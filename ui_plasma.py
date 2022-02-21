@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 ################################################################################
 ## Form generated from reading UI file 'plasmamKHoVA.ui'
 ##
